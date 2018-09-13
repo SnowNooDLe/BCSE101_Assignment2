@@ -8,19 +8,19 @@ class Controller {
           {
             "rank": 1,
             "name": "Canterbury",
-            "venue": "Christchurch Stadium", 
+            "venue": "Christchurch Stadium",
             "city": "Christchurch"
           },
           {
             "rank": 2,
             "name": "Tasman",
-            "venue": "Lansdowne Park", 
+            "venue": "Lansdowne Park",
             "city": "Blenheim"
           },
           {
             "rank": 3,
             "name": "Taranaki",
-            "venue": "Yarrow Stadium", 
+            "venue": "Yarrow Stadium",
             "city": "Taranaki"
           },
           {
@@ -32,19 +32,19 @@ class Controller {
           {
             "rank": 5,
             "name": "Counties Manukau",
-            "venue": "Navigation Homes Stadium", 
+            "venue": "Navigation Homes Stadium",
             "city": "Pukekohe"
           },
           {
             "rank": 6,
             "name": "Auckland",
-            "venue": "Eden Park", 
+            "venue": "Eden Park",
             "city": "Auckland"
           },
           {
             "rank": 7,
             "name": "Wellington",
-            "venue": "Westpac Stadium", 
+            "venue": "Westpac Stadium",
             "city": "Wellington"
           },
           {
@@ -91,7 +91,7 @@ class Controller {
           }
         ],
         "games": [
-          { 
+          {
             "week": 1,
             "homeTeamRank": 4,
             "awayTeamRank": 11,
@@ -517,17 +517,17 @@ class Controller {
   static setup () {
     let the2018Competition = new Competition('Mitre 10 Cup', 2018)
     let competitionData = Controller.getJSON()
-    
+
     let allTeams = competitionData.teams
     for (let aTeam of allTeams) {
       the2018Competition.addTeam(aTeam.rank, aTeam.name, aTeam.venue, aTeam.city)
     }
-  
+
     let allGames = competitionData.games
     for (let aGame of allGames) {
       the2018Competition.addGame(aGame.week, aGame.homeTeamRank, aGame.awayTeamRank, aGame.dateTime)
     }
-  
+
     return the2018Competition
   }
 }
