@@ -7,7 +7,7 @@ class Game {
 	}
 
 	toString () {
-    let result = `@ ${this.week} there is a game between ( ${this.homeTeamRank} ) versus $${this.awayTeamRank} on ${this.dateTime}`
+    let result = `${this.week} ${this.homeTeamRank} ${this.awayTeamRank}  ${this.dateTime}`
     return result
 	}
 }
