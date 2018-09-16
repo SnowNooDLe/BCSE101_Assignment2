@@ -6,7 +6,7 @@ class Team:
         self.city = newCity
 
     def __str__(self):
-        result  = "testing"
+        result = f"{self.rank} {self.name}"
         return result
 
 class Game:
@@ -17,7 +17,7 @@ class Game:
         self.dateTime = newDateTime
 
     def __str__(self):
-        result = "testing"
+        result = f"@ {self.week}, {self.homeTeamRank} vs {self.newAwayTeamRank} @ {self.dateTime}"
         return result
 
 
@@ -25,17 +25,27 @@ class Competition:
     def __init__(self, new_title, new_year):
         self.title = new_title
         self.year = new_year
-        self.allTeams = []
+        self.allPDTeams = []
+        self.allCDTeams = []
         self.allGames = []
 
     def addTeam(self, newRank, newName, newVenue, newCity):
         newTeam = Team(newRank, newName, newVenue, newCity)
-        self.allTeams.append(newTeam)
+        if (newRank <= 7):
+            self.allPDTeams.append(newTeam)
+        else:
+            self.allCDTeams.append(newTeam)
 
     def addGame(self, newWeek, newHomeTeamRank, newAwayTeamRank, newDateTime):
         newGame = Game(newWeek, newHomeTeamRank, newAwayTeamRank, newDateTime)
         self.allGames.append(newGame)
 
     def __str__(self):
-        result = "testing"
+        result = f"TEAMS\n"
+        result += f"Premiership Division\n"
+        for team in self.allPDTeams:
+            result += str(team) + "\n"
+        result += f"Championship Division\n"
+        for team in self.allCDTeams:
+            result += str(team) + "\n"
         return result
