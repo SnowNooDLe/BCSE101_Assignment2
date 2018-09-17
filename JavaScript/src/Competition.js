@@ -51,25 +51,31 @@ class Competition {
 		for (let aWeek of this.allGames){
 			schedule += 'Week: ' +aWeek[0].week + `${View.NEWLINE()}`
 			for (let aGame of aWeek){
-				// splitting date and time by T
-				// e.g. "2018-07-16T07:35:00.000Z" =>
-				// 2018-07-16 and 07:35:00.00Z
-				let date = aGame.dateTime.split("T")
-				// add date part first, 2018-07-16 eg.
-				schedule += date[0] + `${View.SPACE()}`
-				// and add time part, but cut just for first 5 parts, 07:35
-				+ date[1].slice(0, 5) + `${View.SPACE()}`
+				// to get the date type, e.g. Mon, Jul 16 2018
+				let newDate = new Date(aGame.dateTime).toDateString()
+				// adding that date
+				schedule += newDate + `${View.SPACE()}`
+				// to get time part, couldnt figure out to get just 07:35 part other than this,
+				// As Mike said, I found the working way, which is a big picture, and can simplfy later
+				// get Hour value
+				let newTimeHour = new Date(aGame.dateTime).getHours()
+				// get minuts value
+				let newTimeMinutes = new Date(aGame.dateTime).getMinutes()
+
+				schedule += newTimeHour +':'
+						 + newTimeMinutes + `${View.SPACE()}`
+				// Home team name by their rank
 				for (let aRank of this.allTeams){
 						if (aRank["rank"] === aGame.homeTeamRank){
-							console.log(aRank.name)
+							// console.log(aRank.name)
 							var homeVenue = aRank.venue
 							var homeCity = aRank.city
-							console.log(homeVenue)
+							// console.log(homeVenue)
 							schedule += aRank.name + `${View.SPACE()}`
-
 						}
 				}
 				schedule += "v" + `${View.SPACE()}`
+				// Away team name by their rank
 				for (let aRank of this.allTeams){
 						if (aRank["rank"] === aGame.awayTeamRank){
 							schedule += aRank.name + `${View.SPACE()}`
@@ -80,12 +86,41 @@ class Competition {
 			}
 		}
 		return schedule
+	}
+
+	getCanterburyGames(teamName) {
+		// find the rank of the team we want, as I dont want to use magic number. futureproof
+		for (let aTeam of this.allTeams){
+			if (aTeam["name"] == teamName){
+				var aRank = aTeam["rank"]
+				console.log("im here to find a rank")
+				console.log(aRank)
+			}
+		}
+		let canterburyGame = 'Will only display Canterbury team games' + `${View.NEWLINE()}`
+		console.log("Where am i?")
+		for (let eachWeek of this.allGames){
+			for (let aCanterburyGame of eachWeek){
+				if (aCanterburyGame["homeTeamRank"] === aRank
+					|| aCanterburyGame["awayTeamRank"] === aRank){
+				console.log("am i here ?")
+				canterburyGame += aCanterburyGame + `${View.NEWLINE()}`
+				}
+			}
+		}
+		console.log("Am i here ? Then why ?")
+		return canterburyGame
+	}
+	// Thinking to make a method that will create dictionary.
+	// So i can get team name by knowing their rank
+	getCrossOvergames() {
 
 	}
 
 	getAll() {
 		View.out(this.getTeams())
 		View.out(this.getGames())
+		View.out(this.getCanterburyGames('Canterbury'))
 	}
 
 
