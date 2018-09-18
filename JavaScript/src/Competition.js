@@ -2,9 +2,13 @@ class Competition {
 	constructor (newTitle, newYear) {
 		this.title = newTitle
 		this.year = newYear
+		// futureproof lists for each Premiership and Championship
+		// for crossgames.
 		this.allPDTeams = []
 		this.allCDTeams = []
+		// whole lists of team for Premiership and Championship based onrank
 		this.allTeams = []
+		// there are number of games each week, and number of weeks
 		this.allGames = [[],[],[],[],[],[],[],[],[]]
 	}
 
@@ -36,9 +40,6 @@ class Competition {
 	}
 
 	addGame(newWeek, newHomeTeamRank, newAwayTeamRank, newDateTime){
-		// let  newGame = new Game(newWeek,
-		// 										this.allTeams[newHomeTeamRank-1].name, this.allTeams[newAwayTeamRank-1].name, newDateTime)
-		// test
 		let  newGame = new Game(newWeek,
 														newHomeTeamRank,
 														newAwayTeamRank,
@@ -62,27 +63,22 @@ class Competition {
 				// get minuts value
 				let newTimeMinutes = new Date(aGame.dateTime).getMinutes()
 
-				schedule += newTimeHour +':'
-						 + newTimeMinutes + `${View.SPACE()}`
-				// Home team name by their rank
-				for (let aRank of this.allTeams){
-						if (aRank["rank"] === aGame.homeTeamRank){
-							// console.log(aRank.name)
-							var homeVenue = aRank.venue
-							var homeCity = aRank.city
-							// console.log(homeVenue)
-							schedule += aRank.name + `${View.SPACE()}`
-						}
-				}
-				schedule += "v" + `${View.SPACE()}`
-				// Away team name by their rank
-				for (let aRank of this.allTeams){
-						if (aRank["rank"] === aGame.awayTeamRank){
-							schedule += aRank.name + `${View.SPACE()}`
-						}
-				}
-				schedule += homeVenue + `${View.SPACE()}`
-									+ homeCity + `${View.NEWLINE()}`
+				schedule += newTimeHour +':' + newTimeMinutes + `${View.SPACE()}`
+
+									// getting name for home team from rank
+				schedule += this.allTeams[aGame.homeTeamRank - 1].name
+									+ `${View.SPACE()}`
+									+ "v"
+									+ `${View.SPACE()}`
+									// getting name for away team from rank
+									+ this.allTeams[aGame.awayTeamRank - 1].name
+									+ `${View.SPACE()}`
+									// getting venue for home team from rank
+									+ this.allTeams[aGame.homeTeamRank - 1].venue
+									+ `${View.SPACE()}`
+									// getting city for home team from rank
+									+ this.allTeams[aGame.homeTeamRank - 1].city
+									+ `${View.NEWLINE()}`
 			}
 		}
 		return schedule
