@@ -89,12 +89,9 @@ class Competition {
 		for (let aTeam of this.allTeams){
 			if (aTeam["name"] == teamName){
 				var aRank = aTeam["rank"]
-				console.log("im here to find a rank")
-				console.log(aRank)
 			}
 		}
 		let canterburyGame = 'Will only display Canterbury team games' + `${View.NEWLINE()}`
-		console.log("Where am i?")
 		for (let eachWeek of this.allGames){
 			for (let specificTeamGame of eachWeek){
 				if (specificTeamGame["homeTeamRank"] === aRank
@@ -114,7 +111,6 @@ class Competition {
 				}
 			}
 		}
-		console.log("Am i here ? Then why ?")
 		return canterburyGame
 	}
 	// Thinking to make a method that will create dictionary.
@@ -124,8 +120,8 @@ class Competition {
 	}
 
 	getAll() {
-		// View.out(this.getTeams())
-		// View.out(this.getGames())
+		View.out(this.getTeams())
+		View.out(this.getGames())
 		View.out(this.getCanterburyGames('Canterbury'))
 	}
 
