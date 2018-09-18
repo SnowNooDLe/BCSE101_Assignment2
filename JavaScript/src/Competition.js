@@ -50,7 +50,7 @@ class Competition {
 	getGames() {
 		let schedule = this.year + `${View.SPACE()}` + this.title + ` Draw ${View.NEWLINE()}`
 		for (let aWeek of this.allGames){
-			schedule += 'Week: ' +aWeek[0].week + `${View.NEWLINE()}`
+			schedule += "Week: " +aWeek[0].week + `${View.NEWLINE()}`
 			for (let aGame of aWeek){
 				// to get the date type, e.g. Mon, Jul 16 2018
 				let newDate = new Date(aGame.dateTime).toDateString()
@@ -96,11 +96,21 @@ class Competition {
 		let canterburyGame = 'Will only display Canterbury team games' + `${View.NEWLINE()}`
 		console.log("Where am i?")
 		for (let eachWeek of this.allGames){
-			for (let aCanterburyGame of eachWeek){
-				if (aCanterburyGame["homeTeamRank"] === aRank
-					|| aCanterburyGame["awayTeamRank"] === aRank){
-				console.log("am i here ?")
-				canterburyGame += aCanterburyGame + `${View.NEWLINE()}`
+			for (let specificTeamGame of eachWeek){
+				if (specificTeamGame["homeTeamRank"] === aRank
+						|| specificTeamGame["awayTeamRank"] === aRank){
+					canterburyGame += "Week: " + specificTeamGame.week
+													+ `${View.SPACE()}`
+													+ "Team: " + this.allTeams[specificTeamGame.homeTeamRank - 1].name
+													+ `${View.SPACE()}`
+													+ "v"
+													+ `${View.SPACE()}`
+													+ this.allTeams[specificTeamGame.awayTeamRank - 1].name
+													+ `${View.SPACE()}`
+													+ "At: " + this.allTeams[specificTeamGame.homeTeamRank -1].venue
+													+ `${View.SPACE()}`
+													+ this.allTeams[specificTeamGame.homeTeamRank -1].city
+					 								+ `${View.NEWLINE()}`
 				}
 			}
 		}
@@ -114,8 +124,8 @@ class Competition {
 	}
 
 	getAll() {
-		View.out(this.getTeams())
-		View.out(this.getGames())
+		// View.out(this.getTeams())
+		// View.out(this.getGames())
 		View.out(this.getCanterburyGames('Canterbury'))
 	}
 
