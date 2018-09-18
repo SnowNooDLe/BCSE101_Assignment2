@@ -66,7 +66,7 @@ class Competition {
 				schedule += newTimeHour +':' + newTimeMinutes + `${View.SPACE()}`
 
 									// getting name for home team from rank
-				schedule += this.allTeams[aGame.homeTeamRank - 1].name
+				schedule += "Team: " + this.allTeams[aGame.homeTeamRank - 1].name
 									+ `${View.SPACE()}`
 									+ "v"
 									+ `${View.SPACE()}`
@@ -74,10 +74,9 @@ class Competition {
 									+ this.allTeams[aGame.awayTeamRank - 1].name
 									+ `${View.SPACE()}`
 									// getting venue for home team from rank
-									+ this.allTeams[aGame.homeTeamRank - 1].venue
-									+ `${View.SPACE()}`
+									+ "At: " + this.allTeams[aGame.homeTeamRank - 1].venue
 									// getting city for home team from rank
-									+ this.allTeams[aGame.homeTeamRank - 1].city
+									+ ", " + this.allTeams[aGame.homeTeamRank - 1].city
 									+ `${View.NEWLINE()}`
 			}
 		}
@@ -91,12 +90,12 @@ class Competition {
 				var aRank = aTeam["rank"]
 			}
 		}
-		let canterburyGame = 'Will only display Canterbury team games' + `${View.NEWLINE()}`
+		let specificTeam = "Will only display " + teamName + " team games" + `${View.NEWLINE()}`
 		for (let eachWeek of this.allGames){
 			for (let specificTeamGame of eachWeek){
 				if (specificTeamGame["homeTeamRank"] === aRank
 						|| specificTeamGame["awayTeamRank"] === aRank){
-					canterburyGame += "Week: " + specificTeamGame.week
+					specificTeam += "Week: " + specificTeamGame.week
 													+ `${View.SPACE()}`
 													+ "Team: " + this.allTeams[specificTeamGame.homeTeamRank - 1].name
 													+ `${View.SPACE()}`
@@ -111,7 +110,7 @@ class Competition {
 				}
 			}
 		}
-		return canterburyGame
+		return specificTeam
 	}
 	// Thinking to make a method that will create dictionary.
 	// So i can get team name by knowing their rank
