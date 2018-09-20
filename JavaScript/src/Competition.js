@@ -50,7 +50,7 @@ class Competition {
 	getGames() {
 		let schedule = this.year + `${View.SPACE()}` + this.title + ` Draw ${View.NEWLINE()}`
 		for (let aWeek of this.allGames){
-			schedule += "Week: " +aWeek[0].week + `${View.NEWLINE()}`
+			schedule += "Week: " + aWeek[0].week + `${View.NEWLINE()}`
 			for (let aGame of aWeek){
 				// to get the date type, e.g. Mon, Jul 16 2018
 				let newDate = new Date(aGame.dateTime).toDateString()
@@ -68,7 +68,7 @@ class Competition {
 									// getting name for home team from rank
 				schedule += "Team: " + this.allTeams[aGame.homeTeamRank - 1].name
 									+ `${View.SPACE()}`
-									+ "v"
+									+ "vs"
 									+ `${View.SPACE()}`
 									// getting name for away team from rank
 									+ this.allTeams[aGame.awayTeamRank - 1].name
@@ -95,6 +95,14 @@ class Competition {
 			for (let specificTeamGame of eachWeek){
 				if (specificTeamGame["homeTeamRank"] === aRank
 						|| specificTeamGame["awayTeamRank"] === aRank){
+					let newDate = new Date(specificTeamGame.dateTime).toDateString()
+					specificTeam += newDate + `${View.SPACE()}`
+					let newTimeHour = new Date(specificTeamGame.dateTime).getHours()
+					// get minuts value
+					let newTimeMinutes = new Date(specificTeamGame.dateTime).getMinutes()
+
+					specificTeam += newTimeHour +':' + newTimeMinutes + `${View.SPACE()}`
+
 					specificTeam += "Week: " + specificTeamGame.week
 													+ `${View.SPACE()}`
 													+ "Team: " + this.allTeams[specificTeamGame.homeTeamRank - 1].name
@@ -119,8 +127,11 @@ class Competition {
 	}
 
 	getAll() {
+		View.out('----------- Teams -----------' + View.NEWLINE())
 		View.out(this.getTeams())
+		View.out(View.NEWLINE() + '----------- Games -----------' + View.NEWLINE())
 		View.out(this.getGames())
+		View.out(View.NEWLINE() + '----------- Canterbury Geams -----------' + View.NEWLINE())
 		View.out(this.getCanterburyGames('Canterbury'))
 	}
 
