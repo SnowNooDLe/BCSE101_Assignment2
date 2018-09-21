@@ -49,6 +49,7 @@ class Competition {
 														newHomeTeamRank,
 														newAwayTeamRank,
 														newDateTime)
+		// as list's index start from 0 but there is no week 0. so minus 1 from week
 		this.allGames[newWeek-1].push(newGame)
 	}
 

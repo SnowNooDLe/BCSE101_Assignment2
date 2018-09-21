@@ -1,27 +1,6 @@
 import datetime
-
-class Team:
-    def __init__(self, newRank, newName, newVenue, newCity):
-        self.rank = newRank
-        self.name = newName
-        self.venue = newVenue
-        self.city = newCity
-
-    def __str__(self):
-        result = f"{self.rank} {self.name}"
-        return result
-
-class Game:
-    def __init__(self, newWeek, newHomeTeamRank, newAwayTeamRank, newDateTime):
-        self.week = newWeek
-        self.homeTeamRank = newHomeTeamRank
-        self.awayTeamRank = newAwayTeamRank
-        self.dateTime = newDateTime
-
-    def __str__(self):
-        result = f"@ Week :{self.week},{self.dateTime}, Team {self.homeTeamRank} vs {self.awayTeamRank}"
-        return result
-
+from Game import Game
+from Team import Team
 
 class Competition:
     def __init__(self, new_title, new_year):
