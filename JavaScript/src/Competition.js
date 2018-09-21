@@ -10,6 +10,9 @@ class Competition {
 		this.allTeams = []
 		// there are number of games each week, and number of weeks
 		this.allGames = [[],[],[],[],[],[],[],[],[]]
+		// will be better way, but this will be used in getCrossOverGames.
+		this.allPDRanks = []
+		this.allCDRanks = []
 	}
 
 	addTeam(newRank, newName, newVenue, newCity){
@@ -18,9 +21,11 @@ class Competition {
 		this.allTeams.push(newTeam)
 		if (newRank <= 7){
 			this.allPDTeams.push(newTeam)
+			this.allPDRanks.push(newTeam.rank)
 		}
 		else {
 			this.allCDTeams.push(newTeam)
+			this.allCDRanks.push(newTeam.rank)
 		}
 
 	}
@@ -120,9 +125,40 @@ class Competition {
 		}
 		return specificTeam
 	}
-	// Thinking to make a method that will create dictionary.
-	// So i can get team name by knowing their rank
-	getCrossOvergames() {
+
+	getCrossOverGames() {
+		let crossovergames = "Will display crossover games" + `${View.NEWLINE()}`
+		for (let eachWeek of this.allGames){
+			for (let teamGame of eachWeek){
+				if ((this.allPDRanks.includes(teamGame["homeTeamRank"]) &&
+							this.allCDRanks.includes(teamGame["awayTeamRank"]))
+						||
+						(this.allCDRanks.includes(teamGame["homeTeamRank"]) &&
+									this.allPDRanks.includes(teamGame["awayTeamRank"]))){
+					let newDate = new Date(teamGame.dateTime).toDateString()
+					crossovergames += newDate + `${View.SPACE()}`
+					let newTimeHour = new Date(teamGame.dateTime).getHours()
+					// get minuts value
+					let newTimeMinutes = new Date(teamGame.dateTime).getMinutes()
+
+					crossovergames += newTimeHour +':' + newTimeMinutes + `${View.SPACE()}`
+
+					crossovergames += "Week: " + teamGame.week
+													+ `${View.SPACE()}`
+													+ "Team: rank:" + teamGame.homeTeamRank + `${View.SPACE()}` + this.allTeams[teamGame.homeTeamRank - 1].name
+													+ `${View.SPACE()}`
+													+ "vs"
+													+ `${View.SPACE()}`
+													+ "rank:" + teamGame.awayTeamRank + `${View.SPACE()}` + this.allTeams[teamGame.awayTeamRank - 1].name
+													+ `${View.SPACE()}`
+													+ "At: " + this.allTeams[teamGame.homeTeamRank -1].venue
+													+ `${View.SPACE()}`
+													+ this.allTeams[teamGame.homeTeamRank -1].city
+					 								+ `${View.NEWLINE()}`
+				}
+			}
+		}
+		return crossovergames
 
 	}
 
@@ -132,7 +168,9 @@ class Competition {
 		View.out(View.NEWLINE() + '----------- Games -----------' + View.NEWLINE())
 		View.out(this.getGames())
 		View.out(View.NEWLINE() + '----------- Canterbury Geams -----------' + View.NEWLINE())
-		View.out(this.getCanterburyGames('Canterbury'))
+		View.out(this.getCanterburyGames('Canterbury') + View.NEWLINE())
+		View.out('----------- Crossover Games -----------' + View.NEWLINE())
+		View.out(this.getCrossOverGames())
 	}
 
 

@@ -31,14 +31,19 @@ class Competition:
         self.allCDTeams = []
         self.allTeams = []
         self.allGames = []
+        self.allPDRanks = []
+        self.allCDRanks = []
 
     def addTeam(self, newRank, newName, newVenue, newCity):
         newTeam = Team(newRank, newName, newVenue, newCity)
         self.allTeams.append(newTeam)
         if (newRank <= 7):
             self.allPDTeams.append(newTeam)
+            self.allPDRanks.append(newTeam.rank)
         else:
             self.allCDTeams.append(newTeam)
+            self.allCDRanks.append(newTeam.rank)
+
     def getTeams(self):
         result = f"TEAMS\n"
         result += f"Premiership Division\n"
@@ -87,18 +92,19 @@ class Competition:
         return specificTeamGames
 
     def getCrossOverGames(self):
-        crossovergames = 'Will only display crossover games\n'
+        crossovergames = "Will display crossover games\n"
 
-        for thatTeam in self.allGames:
-            if ((thatTeam.homeTeamRank in self.allPDTeams.rank and thatTeam.awayTeamRank in self.allCDTeams.rank) or (thatTeam.homeTeamRank in self.allCDTeams.rank and thatTeam.awayTeamRank in self.allPDTeams.rank)):
-                date_time_obj = datetime.datetime.strptime(thatTeam.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
-                crossovergames += 'Week: ' + str(thatTeam.week) + '\n'
+        for eachGame in self.allGames:
+            if ((eachGame.homeTeamRank in self.allPDRanks) and (eachGame.awayTeamRank in self.allCDRanks)) or ((eachGame.homeTeamRank in self.allCDRanks) and (eachGame.awayTeamRank in self.allPDRanks)):
+
+                date_time_obj = datetime.datetime.strptime(eachGame.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
+                crossovergames += 'Week: ' + str(eachGame.week) + '\n'
                 crossovergames += str(date_time_obj.date().strftime("%A %d")) + ', '
                 crossovergames += str(date_time_obj.time().strftime("%H:%M%p")) + ', '
-                crossovergames += 'Team: ' + self.allTeams[thatTeam.homeTeamRank - 1].name
-                crossovergames += ' vs ' + self.allTeams[thatTeam.awayTeamRank - 1].name
-                crossovergames += ' At: ' + self.allTeams[thatTeam.homeTeamRank - 1].venue
-                crossovergames += ', ' + self.allTeams[thatTeam.homeTeamRank - 1].city + '\n'
+                crossovergames += 'Team: rank:' + str(self.allTeams[eachGame.homeTeamRank - 1].rank) + ' ' + self.allTeams[eachGame.homeTeamRank - 1].name
+                crossovergames += ' vs rank:' + str(self.allTeams[eachGame.awayTeamRank - 1].rank) + ' ' + self.allTeams[eachGame.awayTeamRank - 1].name
+                crossovergames += ' At: ' + self.allTeams[eachGame.homeTeamRank - 1].venue
+                crossovergames += ', ' + self.allTeams[eachGame.homeTeamRank - 1].city + '\n'
 
         return crossovergames
 
