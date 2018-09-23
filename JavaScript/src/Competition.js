@@ -77,7 +77,6 @@ class Competition {
 				let newTimeHour = new Date(aGame.dateTime).getHours()
 				// get minuts value
 				let newTimeMinutes = new Date(aGame.dateTime).getMinutes()
-
 				schedule += newTimeHour +':' + newTimeMinutes + `${View.SPACE()}`
 
 									// getting name for home team from rank
@@ -198,7 +197,6 @@ class Competition {
 			}
 		}
 		return crossovergames
-
 	}
 
 	// getAll method, which will be ran to printout on web to see the result.
@@ -212,6 +210,4 @@ class Competition {
 		View.out('----------- Crossover Games -----------' + View.NEWLINE())
 		View.out(this.getCrossOverGames())
 	}
-
-
 }
