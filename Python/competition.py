@@ -2,6 +2,7 @@ import datetime
 from Game import Game
 from Team import Team
 
+# Hence this is just python translated version of competition.js, not gonna leave comments.
 class Competition:
     def __init__(self, new_title, new_year):
         self.title = new_title
@@ -42,8 +43,8 @@ class Competition:
         for aWeek in self.allGames:
             date_time_obj = datetime.datetime.strptime(aWeek.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
             schedule += 'Week: ' + str(aWeek.week) + '\n'
-            schedule += str(date_time_obj.date().strftime("%A %d")) + ' '
-            schedule += str(date_time_obj.time().strftime("%H:%M%p")) + ' '
+            schedule += str(date_time_obj.date().strftime("%A %d")) + ', '
+            schedule += str(date_time_obj.time().strftime("%H:%M")) + 'PM '
             schedule += 'Team: ' + self.allTeams[aWeek.homeTeamRank - 1].name
             schedule += ' vs ' + self.allTeams[aWeek.awayTeamRank - 1].name
             schedule += ' At: ' + self.allTeams[aWeek.homeTeamRank - 1].venue
@@ -62,7 +63,8 @@ class Competition:
                 date_time_obj = datetime.datetime.strptime(thatTeam.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
                 specificTeamGames += 'Week: ' + str(thatTeam.week) + '\n'
                 specificTeamGames += str(date_time_obj.date().strftime("%A %d")) + ', '
-                specificTeamGames += str(date_time_obj.time().strftime("%H:%M%p")) + ', '
+                # I could've used strftime("%H:%M%p") but this case will allocate as AM as time is 7 not 19 for 7PM.
+                specificTeamGames += str(date_time_obj.time().strftime("%H:%M")) + 'PM, '
                 specificTeamGames += 'Team: ' + self.allTeams[thatTeam.homeTeamRank - 1].name
                 specificTeamGames += ' vs ' + self.allTeams[thatTeam.awayTeamRank - 1].name
                 specificTeamGames += ' At: ' + self.allTeams[thatTeam.homeTeamRank - 1].venue
@@ -79,7 +81,7 @@ class Competition:
                 date_time_obj = datetime.datetime.strptime(eachGame.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
                 crossovergames += 'Week: ' + str(eachGame.week) + '\n'
                 crossovergames += str(date_time_obj.date().strftime("%A %d")) + ', '
-                crossovergames += str(date_time_obj.time().strftime("%H:%M%p")) + ', '
+                crossovergames += str(date_time_obj.time().strftime("%H:%M")) + 'PM, '
                 crossovergames += 'Team: rank:' + str(self.allTeams[eachGame.homeTeamRank - 1].rank) + ' ' + self.allTeams[eachGame.homeTeamRank - 1].name
                 crossovergames += ' vs rank:' + str(self.allTeams[eachGame.awayTeamRank - 1].rank) + ' ' + self.allTeams[eachGame.awayTeamRank - 1].name
                 crossovergames += ' At: ' + self.allTeams[eachGame.homeTeamRank - 1].venue
