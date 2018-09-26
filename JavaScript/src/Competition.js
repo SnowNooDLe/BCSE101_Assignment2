@@ -77,7 +77,7 @@ class Competition {
 				let newTimeHour = new Date(aGame.dateTime).getHours()
 				// get minuts value
 				let newTimeMinutes = new Date(aGame.dateTime).getMinutes()
-				schedule += newTimeHour +':' + newTimeMinutes + `${View.SPACE()}`
+				schedule += newTimeHour +':' + newTimeMinutes + 'pm' + `${View.SPACE()}`
 
 									// getting name for home team from rank
 				schedule += "Team: " + this.allTeams[aGame.homeTeamRank - 1].name
@@ -124,7 +124,7 @@ class Competition {
 					// get minuts value
 					let newTimeMinutes = new Date(specificTeamGame.dateTime).getMinutes()
 
-					specificTeam += newTimeHour +':' + newTimeMinutes + `${View.SPACE()}`
+					specificTeam += newTimeHour +':' + newTimeMinutes + 'pm' + `${View.SPACE()}`
 
 					specificTeam += "Week: " + specificTeamGame.week
 													+ `${View.SPACE()}`
@@ -174,7 +174,7 @@ class Competition {
 					// get minuts value
 					let newTimeMinutes = new Date(teamGame.dateTime).getMinutes()
 
-					crossovergames += newTimeHour +':' + newTimeMinutes + `${View.SPACE()}`
+					crossovergames += newTimeHour +':' + newTimeMinutes + 'pm' + `${View.SPACE()}`
 
 					crossovergames += "Week: " + teamGame.week
 													+ `${View.SPACE()}`
