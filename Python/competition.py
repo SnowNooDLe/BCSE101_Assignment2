@@ -42,9 +42,9 @@ class Competition:
         schedule = str(self.year) + ' ' + self.title + ' Draw\n'
         for aWeek in self.allGames:
             date_time_obj = datetime.datetime.strptime(aWeek.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
-            schedule += 'Week: ' + str(aWeek.week) + '\n'
-            schedule += str(date_time_obj.date().strftime("%A %d")) + ', '
-            schedule += str(date_time_obj.time().strftime("%H:%M")) + 'PM '
+            schedule += 'Week:' + str(aWeek.week) + '\n'
+            schedule += str(date_time_obj.date().strftime("%a %d")) + ', '
+            schedule += str(date_time_obj.time().strftime("%H:%M%PM")) + ' '
             schedule += 'Team: ' + self.allTeams[aWeek.homeTeamRank - 1].name
             schedule += ' vs ' + self.allTeams[aWeek.awayTeamRank - 1].name
             schedule += ' At: ' + self.allTeams[aWeek.homeTeamRank - 1].venue
@@ -61,10 +61,10 @@ class Competition:
         for thatTeam in self.allGames:
             if (thatTeam.homeTeamRank == rank or thatTeam.awayTeamRank == rank):
                 date_time_obj = datetime.datetime.strptime(thatTeam.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
-                specificTeamGames += 'Week: ' + str(thatTeam.week) + '\n'
-                specificTeamGames += str(date_time_obj.date().strftime("%A %d")) + ', '
+                specificTeamGames += 'Week:' + str(thatTeam.week) + '\n'
+                specificTeamGames += str(date_time_obj.date().strftime("%a %d")) + ', '
                 # I could've used strftime("%H:%M%p") but this case will allocate as AM as time is 7 not 19 for 7PM.
-                specificTeamGames += str(date_time_obj.time().strftime("%H:%M")) + 'PM, '
+                specificTeamGames += str(date_time_obj.time().strftime("%H:%MPM")) + ', '
                 specificTeamGames += 'Team: ' + self.allTeams[thatTeam.homeTeamRank - 1].name
                 specificTeamGames += ' vs ' + self.allTeams[thatTeam.awayTeamRank - 1].name
                 specificTeamGames += ' At: ' + self.allTeams[thatTeam.homeTeamRank - 1].venue
@@ -78,10 +78,10 @@ class Competition:
         for eachGame in self.allGames:
             if ((eachGame.homeTeamRank in self.allPDRanks) and (eachGame.awayTeamRank in self.allCDRanks)) or ((eachGame.homeTeamRank in self.allCDRanks) and (eachGame.awayTeamRank in self.allPDRanks)):
 
-                date_time_obj = datetime.datetime.strptime(eachGame.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
-                crossovergames += 'Week: ' + str(eachGame.week) + '\n'
-                crossovergames += str(date_time_obj.date().strftime("%A %d")) + ', '
-                crossovergames += str(date_time_obj.time().strftime("%H:%M")) + 'PM, '
+                date_time_obj = datetime.datetime.strptime(eachGame.dateTime, '%Y-%m-%dT%I:%M:%S.%fZ')
+                crossovergames += 'Week:' + str(eachGame.week) + '\n'
+                crossovergames += str(date_time_obj.date().strftime("%a %d")) + ', '
+                crossovergames += str(date_time_obj.time().strftime("%H:%MPM")) + ', '
                 crossovergames += 'Team: rank:' + str(self.allTeams[eachGame.homeTeamRank - 1].rank) + ' ' + self.allTeams[eachGame.homeTeamRank - 1].name
                 crossovergames += ' vs rank:' + str(self.allTeams[eachGame.awayTeamRank - 1].rank) + ' ' + self.allTeams[eachGame.awayTeamRank - 1].name
                 crossovergames += ' At: ' + self.allTeams[eachGame.homeTeamRank - 1].venue
