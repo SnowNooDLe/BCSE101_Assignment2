@@ -71,13 +71,11 @@ class Competition {
 				let newDate = new Date(aGame.dateTime).toDateString()
 				// adding that date
 				schedule += newDate + `${View.SPACE()}`
-				// to get time part, couldnt figure out to get just 07:35 part other than this,
-				// As Mike said, I found the working way, which is a big picture, and can simplfy later
-				// get Hour value
-				let newTimeHour = new Date(aGame.dateTime).getHours()
-				// get minuts value
-				let newTimeMinutes = new Date(aGame.dateTime).getMinutes()
-				schedule += newTimeHour +':' + newTimeMinutes + 'pm' + `${View.SPACE()}`
+				// getting time like 7:35PM
+				// was gonna use navigator.language instead of en-US but it comes up with korean
+				// even thought default language is ENG
+				let newTime = new Date(aGame.dateTime).toLocaleTimeString("en-US", {hour: "numeric", minute: "numeric"})
+				schedule += newTime + `${View.SPACE()}`
 
 									// getting name for home team from rank
 				schedule += "Team: " + this.allTeams[aGame.homeTeamRank - 1].name
@@ -119,12 +117,12 @@ class Competition {
 					// converting time into string, readable time format
 					let newDate = new Date(specificTeamGame.dateTime).toDateString()
 					specificTeam += newDate + `${View.SPACE()}`
-					// get hour value
-					let newTimeHour = new Date(specificTeamGame.dateTime).getHours()
-					// get minuts value
-					let newTimeMinutes = new Date(specificTeamGame.dateTime).getMinutes()
+					// getting time like 7:35PM
+					// was gonna use navigator.language instead of en-US but it comes up with korean
+					// even thought default language is ENG
+					let newTime = new Date(specificTeamGame.dateTime).toLocaleTimeString("en-US", {hour: "numeric", minute: "numeric"})
 
-					specificTeam += newTimeHour +':' + newTimeMinutes + 'pm' + `${View.SPACE()}`
+					specificTeam += newTime + `${View.SPACE()}`
 
 					specificTeam += "Week: " + specificTeamGame.week
 													+ `${View.SPACE()}`
@@ -169,12 +167,12 @@ class Competition {
 					// again, change time to readable, understandable time format
 					let newDate = new Date(teamGame.dateTime).toDateString()
 					crossovergames += newDate + `${View.SPACE()}`
-					// get hour value
-					let newTimeHour = new Date(teamGame.dateTime).getHours()
-					// get minuts value
-					let newTimeMinutes = new Date(teamGame.dateTime).getMinutes()
+					// getting time like 7:35PM
+					// was gonna use navigator.language instead of en-US but it comes up with korean
+					// even thought default language is ENG
+					let newTime = new Date(teamGame.dateTime).toLocaleTimeString("en-US", {hour: "numeric", minute: "numeric"})
 
-					crossovergames += newTimeHour +':' + newTimeMinutes + 'pm' + `${View.SPACE()}`
+					crossovergames += newTime + `${View.SPACE()}`
 
 					crossovergames += "Week: " + teamGame.week
 													+ `${View.SPACE()}`
