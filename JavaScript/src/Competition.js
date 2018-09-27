@@ -65,7 +65,7 @@ class Competition {
 	getGames() {
 		let schedule = this.year + `${View.SPACE()}` + this.title + ` Draw ${View.NEWLINE()}`
 		for (let aWeek of this.allGames){
-			schedule += "Week: " + aWeek[0].week + `${View.NEWLINE()}`
+			schedule += "Week:" + aWeek[0].week + `${View.NEWLINE()}`
 			for (let aGame of aWeek){
 				// to get the date type, e.g. Mon, Jul 16 2018
 				let newDate = new Date(aGame.dateTime).toDateString()
@@ -124,7 +124,7 @@ class Competition {
 
 					specificTeam += newTime + `${View.SPACE()}`
 
-					specificTeam += "Week: " + specificTeamGame.week
+					specificTeam += "Week:" + specificTeamGame.week
 													+ `${View.SPACE()}`
 													// getting hometeam name by rank
 													+ "Team: " + this.allTeams[specificTeamGame.homeTeamRank - 1].name
@@ -174,7 +174,7 @@ class Competition {
 
 					crossovergames += newTime + `${View.SPACE()}`
 
-					crossovergames += "Week: " + teamGame.week
+					crossovergames += "Week:" + teamGame.week
 													+ `${View.SPACE()}`
 													// unlike other method, its comparing between Premiership and Championship
 													// I decided to print out their rank so you can see clearly that those outputs are crossover games.
