@@ -44,7 +44,7 @@ class Competition:
             date_time_obj = datetime.datetime.strptime(aWeek.dateTime, '%Y-%m-%dT%H:%M:%S.%fZ')
             schedule += 'Week:' + str(aWeek.week) + '\n'
             schedule += str(date_time_obj.date().strftime("%a %d")) + ', '
-            schedule += str(date_time_obj.time().strftime("%H:%M%PM")) + ' '
+            schedule += str(date_time_obj.time().strftime("%H:%MPM")) + ' '
             schedule += 'Team: ' + self.allTeams[aWeek.homeTeamRank - 1].name
             schedule += ' vs ' + self.allTeams[aWeek.awayTeamRank - 1].name
             schedule += ' At: ' + self.allTeams[aWeek.homeTeamRank - 1].venue
